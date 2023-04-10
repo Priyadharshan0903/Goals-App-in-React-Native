@@ -5,16 +5,20 @@ import {
   StyleSheet,
   Modal,
   Image,
+  Alert,
 } from "react-native";
 import { useState } from "react";
-import { Pressable } from "react-native";
 
 function GoalInput(props) {
   const [enteredGoalText, setEnteredGoalText] = useState("");
   function addGoalHandler() {
-    props.onAddGoal(enteredGoalText);
-    setEnteredGoalText("");
-    props.onEndGoal();
+    if (enteredGoalText.trim() === "") {
+      Alert.alert("Empty Input", "Please Enter some Input");
+    } else {
+      props.onAddGoal(enteredGoalText);
+      setEnteredGoalText("");
+      props.onEndGoal();
+    }
   }
   function goalInputHandler(enteredText) {
     console.log(enteredText);
